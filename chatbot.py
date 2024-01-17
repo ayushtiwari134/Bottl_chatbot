@@ -37,24 +37,23 @@ def sms():
         elif incoming_message=='bus tickets':
             response = MessagingResponse()
             response.message("Would you like to enter your bus stop or bus number")
-            responded = True
-            return('bus tickets success')
+            
+            return str(response)
         elif  incoming_message =='bus stop':
             response = MessagingResponse()
             response.message("Please enter the source stop name choose one of the following options or type your query")
-            responded = True
-            return('bus stop success')
+            
+            return str(response)
         elif incoming_message =='type stop name':
             response = MessagingResponse()
             response.message("Please type your stop name")
-            responded = True
-            return('stop name success')
+            
+            return str(response)
         elif incoming_message =='bus number':
             response = MessagingResponse()
             response.message("Please enter your bus number")
             bus_number = request.form.get('Body').lower()
-            responded= True
-            return('bus number success')
+            return str(response)
         else:
             # Do nothing for messages other than 'hello'
             response = MessagingResponse()
