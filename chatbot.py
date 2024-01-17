@@ -2,8 +2,10 @@ from flask import Flask, request, jsonify
 from twilio.twiml.messaging_response import MessagingResponse
 from twilio import *
 import requests
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 from twilio.rest import Client
 
