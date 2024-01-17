@@ -20,11 +20,11 @@ def reply():
         reply = "Hello! I am your ticket-bot and I will assist you in purchasing bus tickets, bus passes and tracking live location of busses. Type your queries or choose one of the options below for me to assist you"
         send_message(mobile_no,reply)
         responded = True
-        return (incoming_msg)
+        return (reply)
         
     if len(words) == 2 and "Bus tickets" in incoming_msg:
         reminder_string = "Would you like to enter your bus stop or bus number"
-        message.body(reminder_string)
+        send_message(mobile_no,reminder_string)
         responded = True
 
         if len(words)==2 and "Bus stop" in incoming_msg:
