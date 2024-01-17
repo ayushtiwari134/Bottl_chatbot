@@ -42,31 +42,6 @@ def reply():
             message.body(reminder_string)
             responded = True
         
-    elif len(words)!=1:
-        input_type =words[0].strip().lower()
-        input_string=words[1].strip()
-        if input_type == "date":
-            reply= "please enter the reminder message in the following format only.\n\n" "*Reminder @* _type the message_"
-            set_reminder_date(input_string)
-            message.body(reply)
-            responded=True
-    if input_type=="reminder":
-        reply="your reminder is set"
-        set_reminder_body(input_string)
-        message.body(reply)
-        responded=True
-    if not responded:
-        message.body('Incorrect request format.Please enter in the correct format')
-
-    return str(response)
-def set_reminder_date(msg):
-    p = parse(msg)
-    date = p.strftime('%d/%m/%Y')
-    save_reminder_date(date)
-    return 0
-def set_reminder_body(msg):
-    save_reminder_body(msg)
-    return 0
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,13 +1,23 @@
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
-from gsheet_func import *
-
-from dateutil.parser import parse
+from twilio import *
 
 
 app = Flask(__name__)
 count=0
+from twilio.rest import Client
 
+account_sid = 'AC68dece1aeedd5877f9b238a3cdfca6d0'
+auth_token = '034927186136026d394e4cb36cdacbef'
+client = Client(account_sid, auth_token)
+
+# message = client.messages.create(
+#   from_='whatsapp:+14155238886',
+#   body='',
+#   to='whatsapp:+917439042931'
+# )
+
+# print(message.sid)
 
 @app.route("/sms", methods=['POST'])
 def reply():
@@ -45,3 +55,6 @@ def reply():
             reminder_string="Please enter your bus number"
             message.body(reminder_string)
             responded= True 
+        
+if __name__ == "__main__":
+    app.run(debug=True)
