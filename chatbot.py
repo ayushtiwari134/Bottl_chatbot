@@ -30,7 +30,7 @@ def sms():
     print(incoming_msg)
     responded = False
     # words = incoming_msg.split('@')
-    if "hello" in incoming_msg:
+    if  incoming_msg=='hello':
         reply = "Welcome to BMTC ticket bot \nHello! I am your ticket-bot and I will assist you in purchasing bus tickets, bus passes and tracking live location of busses. Type your queries or choose one of the options below for me to assist you.\nPlease enter 'bus tickets' to continue"
         response.message(reply)
         # send_message(response,reply)
