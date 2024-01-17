@@ -20,17 +20,27 @@ client = Client(account_sid, auth_token)
 
 
 @app.route("/sms", methods=['POST'])
-# def send_whatsapp():
-#     try:
-#         # Get recipient phone number from the request data
-#         recipient_phone_number = request.json.get('recipient_phone_number')
-    
-#         # Send a WhatsApp message
-#         message = send_message(recipient_phone_number, 'Hello from Twilio!')
-#     except Exception as e:
-#         return jsonify({'status': 'error', 'error_message': str(e)})
+def sms():
+    try:
+        # Get incoming message and sender's phone number
+        incoming_message = request.form.get('Body', '').lower()
+        sender_phone_number = request.form.get('From', '')
 
-def reply():
+        # Check if the incoming message is 'hello'
+        if incoming_message == 'hello':
+            # Respond with a custom message
+            response = MessagingResponse()
+            response.message(f'Hello! You said: "{incoming_message}"')
+
+            # Send the response
+            return str(response)
+        else:
+            # Do nothing for messages other than 'hello'
+            return '', 204
+    except Exception as e:
+        return jsonify({'status': 'error', 'error_message': str(e)})
+
+# def reply():
     
     incoming_msg = request.form.get('Body').lower()
     mobile_no = request.form.get('From')
@@ -76,7 +86,7 @@ def reply():
         responded= True
         return('invalid option')
 
-def send_message(mobile_no,message):
+# def send_message(mobile_no,message):
     
     message = client.messages.create(
             from_='whatsapp:' + twilio_whatsapp_number,
