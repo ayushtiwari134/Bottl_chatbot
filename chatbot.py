@@ -26,12 +26,13 @@ def sms():
 # Get incoming message and sender's phone number
     incoming_msg = request.form.get('Body', '').lower()
     sender_phone_number = request.form.get('From', '')
-    response = MessagingResponse()
+    
     print(incoming_msg)
     responded = False
     # words = incoming_msg.split('@')
     if  incoming_msg=='hello':
         reply = "Welcome to BMTC ticket bot \nHello! I am your ticket-bot and I will assist you in purchasing bus tickets, bus passes and tracking live location of busses. Type your queries or choose one of the options below for me to assist you.\nPlease enter 'bus tickets' to continue"
+        response = MessagingResponse()
         response.message(reply)
         # send_message(response,reply)
         responded = True
@@ -39,18 +40,21 @@ def sms():
         
     elif "bus tickets" in incoming_msg:
         reminder_string = "Would you like to enter your bus stop or bus number"
+        response = MessagingResponse()
         response.message(reminder_string)
         responded = True
         return('bus tickets success')
 
     elif  "bus stop" in incoming_msg:
         reminder_string = "Please enter the source stop name choose one of the following options or type your query"
+        response = MessagingResponse()
         response.message(reminder_string)
         responded = True
         return('bus stop success')
             
     elif  "type stop name" in incoming_msg:
         reminder_string = "Please type your stop name"
+        response = MessagingResponse()
         response.message(reminder_string)
         stop_name = request.form.get('Body').lower()
         responded = True
@@ -58,6 +62,7 @@ def sms():
 
     elif  "bus number" in incoming_msg:
         reminder_string="Please enter your bus number"
+        response = MessagingResponse()
         response.message(reminder_string)
         bus_number = request.form.get('Body').lower()
         responded= True
@@ -65,6 +70,7 @@ def sms():
 
     else:
         reminder_string="Please enter a valid option"
+        response = MessagingResponse()
         response.message(reminder_string)
         responded= True
         return('invalid option')
