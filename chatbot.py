@@ -32,11 +32,33 @@ def sms():
             # Respond with a custom message
             response = MessagingResponse()
             response.message("Welcome to BMTC ticket bot \nHello! I am your ticket-bot and I will assist you in purchasing bus tickets, bus passes and tracking live location of busses. Type your queries or choose one of the options below for me to assist you.\nPlease enter 'bus tickets' to continue")
-
             # Send the response
             return str(response)
+        elif incoming_message=='bus tickets':
+            response = MessagingResponse()
+            response.message("Would you like to enter your bus stop or bus number")
+            responded = True
+            return('bus tickets success')
+        elif  incoming_message =='bus stop':
+            response = MessagingResponse()
+            response.message("Please enter the source stop name choose one of the following options or type your query")
+            responded = True
+            return('bus stop success')
+        elif incoming_message =='type stop name':
+            response = MessagingResponse()
+            response.message("Please type your stop name")
+            responded = True
+            return('stop name success')
+        elif incoming_message =='bus number':
+            response = MessagingResponse()
+            response.message("Please enter your bus number")
+            bus_number = request.form.get('Body').lower()
+            responded= True
+            return('bus number success')
         else:
             # Do nothing for messages other than 'hello'
+            response = MessagingResponse()
+            response.message("Enter valid answer")
             return '', 204
     except Exception as e:
         return jsonify({'status': 'error', 'error_message': str(e)})
