@@ -22,6 +22,26 @@ client = Client(account_sid, auth_token)
 @app.route("/sms", methods=['POST'])
 
 def sms():
+    try:
+        # Get incoming message and sender's phone number
+        incoming_message = request.form.get('Body', '').lower()
+        sender_phone_number = request.form.get('From', '')
+
+        # Check if the incoming message is 'hello'
+        if incoming_message == 'hello':
+            # Respond with a custom message
+            response = MessagingResponse()
+            response.message("Welcome to BMTC ticket bot \nHello! I am your ticket-bot and I will assist you in purchasing bus tickets, bus passes and tracking live location of busses. Type your queries or choose one of the options below for me to assist you.\nPlease enter 'bus tickets' to continue")
+
+            # Send the response
+            return str(response)
+        else:
+            # Do nothing for messages other than 'hello'
+            return '', 204
+    except Exception as e:
+        return jsonify({'status': 'error', 'error_message': str(e)})
+
+# def sms():
     
 # Get incoming message and sender's phone number
     incoming_msg = request.form.get('Body', '').lower()
@@ -75,8 +95,6 @@ def sms():
         responded= True
         return('invalid option')
 
-# def send_message(response,reply):
-#     response.message("hi")
     
 if __name__ == "__main__":
     app.run(debug=True)
